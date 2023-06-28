@@ -13,19 +13,14 @@ public class SalarioUseCase {
 
     private final SalarioRepository salarioRepository;
 
-     public Mono<Salario> crearSalario (SalarioDTO salarioDTO) {
-          Salario salario = salarioDTO.toDomain();
-          return salarioRepository.saveSalario(salario);
-     }
+    public Mono<Salario> crearSalario(SalarioDTO salarioDTO) {
+        Salario salario = salarioDTO.toDomain();
+        return salarioRepository.saveSalario(salario);
+    }
 
-        public Mono<Salario> getSalarioById(Integer id_salario) {
-            return salarioRepository.findByIdSalario(id_salario);
-        }
-
-//        public Mono<Salario> actualizarSalario(SalarioDTO salarioDTO) {
-//            Salario salario = salarioDTO.toDomain();
-//            return salarioRepository.updateSalario(salario);
-//        }
+    public Mono<Salario> getSalarioById(Integer id_salario) {
+        return salarioRepository.findByIdSalario(id_salario);
+    }
 
 
     public Mono<Salario> actualizarSalario(SalarioDTO salarioDTO) {
@@ -36,14 +31,14 @@ public class SalarioUseCase {
                 );
     }
 
-        public Mono<Salario> eliminarSalario(Integer id_salario) {
+    public Mono<Salario> eliminarSalario(Integer id_salario) {
 
-            return salarioRepository.deleteSalario(id_salario);
-        }
+        return salarioRepository.deleteSalario(id_salario);
+    }
 
-        public Flux<Salario> getSalarios() {
+    public Flux<Salario> getSalarios() {
 
-            return salarioRepository.findAllSalarios();
-        }
+        return salarioRepository.findAllSalarios();
+    }
 
 }

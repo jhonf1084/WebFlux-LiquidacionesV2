@@ -18,7 +18,7 @@ public class EmpleadoUseCase {
 
     private final EmpleadoRepository empleadoRepository;
 
-    public Mono<Empleado> crearEmpleado (EmpleadoDTO empleadoDTO) {
+    public Mono<Empleado> crearEmpleado(EmpleadoDTO empleadoDTO) {
         Empleado empleado = empleadoDTO.toDomain();
         return empleadoRepository.saveEmpleado(empleado);
     }
@@ -27,17 +27,11 @@ public class EmpleadoUseCase {
         return empleadoRepository.findByIdEmpleado(id_empleado);
     }
 
-//    public Mono<Empleado> actualizarEmpleado(EmpleadoDTO empleadoDTO) {
-//        Empleado empleado = empleadoDTO.toDomain();
-//        return empleadoRepository.updateEmpleado(empleado);
-//    }
-
-
 
     public Mono<Empleado> actualizarEmpleado(EmpleadoDTO empleadoDTO) {
         return empleadoRepository.findByIdEmpleado(empleadoDTO.getId_empleado())
                 .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()))
-                .flatMap(existingempleado-> empleadoRepository.updateEmpleado(empleadoDTO.toDomain())
+                .flatMap(existingempleado -> empleadoRepository.updateEmpleado(empleadoDTO.toDomain())
                         .then(Mono.just(existingempleado)));
     }
 

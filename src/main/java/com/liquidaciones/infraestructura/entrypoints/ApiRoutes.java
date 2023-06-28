@@ -1,5 +1,6 @@
 package com.liquidaciones.infraestructura.entrypoints;
 
+import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.CargoHandler;
 import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.EmpleadoHandler;
 import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.SalarioHandler;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,5 +43,19 @@ public class ApiRoutes {
                 .andRoute(DELETE(pathBase.concat("/salario").concat(param)).and(accept(MediaType.APPLICATION_JSON)), salarioHandler::eliminarSalario)
                 .andRoute(GET(pathBase.concat("/salario")).and(accept(MediaType.APPLICATION_JSON)), salarioHandler::getSalarios);
     }
+
+
+    @Bean
+    public RouterFunction<ServerResponse> cargoFunctionalEndpoints(CargoHandler cargoHandler) {
+
+        return RouterFunctions
+                .route(POST(pathBase.concat("/cargo")).and(accept(MediaType.APPLICATION_JSON)), cargoHandler::crearCargo)
+                .andRoute(GET(pathBase.concat("/cargo").concat(param)).and(accept(MediaType.APPLICATION_JSON)), cargoHandler::getCargoById)
+                .andRoute(PUT(pathBase.concat("/cargo").concat(param)).and(accept(MediaType.APPLICATION_JSON)), cargoHandler::actualizarCargo)
+                .andRoute(DELETE(pathBase.concat("/cargo").concat(param)).and(accept(MediaType.APPLICATION_JSON)), cargoHandler::eliminarCargo)
+                .andRoute(GET(pathBase.concat("/cargo")).and(accept(MediaType.APPLICATION_JSON)), cargoHandler::getCargos);
+    }
+
+
 
 }
