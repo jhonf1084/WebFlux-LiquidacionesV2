@@ -1,4 +1,4 @@
-package com.liquidaciones.infraestructura.adapters;
+package com.liquidaciones.infraestructura.adapters.DBORepository;
 
 import com.liquidaciones.infraestructura.adapters.entity.EmpleadoDBO;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

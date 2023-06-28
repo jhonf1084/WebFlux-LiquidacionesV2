@@ -6,12 +6,12 @@ import reactor.core.publisher.Mono;
 
 public interface EmpleadoRepository {
 
-    Mono<Empleado> save(Empleado empleado);
+    Mono<Empleado> saveEmpleado(Empleado empleado);
 
-    Mono<Empleado> findById(Integer id_empleado);
-    Mono<Empleado> update(Empleado empleado);
-    Mono<Empleado> delete(Integer id_empleado);
-    Flux<Empleado> findAll();
+    Mono<Empleado> findByIdEmpleado(Integer id_empleado);
+    Mono<Empleado> updateEmpleado(Empleado empleado);
+    Mono<Empleado> deleteEmpleado(Integer id_empleado);
+    Flux<Empleado> findAllEmpleados();
 
 
 }

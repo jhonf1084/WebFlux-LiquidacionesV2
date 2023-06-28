@@ -17,26 +17,27 @@ public class EmpleadoUseCase {
 
     public Mono<Empleado> crearEmpleado (EmpleadoDTO empleadoDTO) {
         Empleado empleado = empleadoDTO.toDomain();
-        return empleadoRepository.save(empleado);
+        return empleadoRepository.saveEmpleado(empleado);
     }
 
     public Mono<Empleado> getEmpleadoById(Integer id_empleado) {
-        return empleadoRepository.findById(id_empleado);
+        return empleadoRepository.findByIdEmpleado(id_empleado);
     }
 
     public Mono<Empleado> actualizarEmpleado(EmpleadoDTO empleadoDTO) {
         Empleado empleado = empleadoDTO.toDomain();
-        return empleadoRepository.update(empleado);
+        return empleadoRepository.updateEmpleado(empleado);
     }
 
     public Mono<Empleado> eliminarEmpleado(Integer id_empleado) {
-        return empleadoRepository.delete(id_empleado);
+
+        return empleadoRepository.deleteEmpleado(id_empleado);
     }
 
 
     public Flux<Empleado> getEmpleados() {
 
-        return empleadoRepository.findAll();
+        return empleadoRepository.findAllEmpleados();
     }
 
 }

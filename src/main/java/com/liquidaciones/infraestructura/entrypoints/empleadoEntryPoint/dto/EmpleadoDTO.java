@@ -26,7 +26,7 @@ public class EmpleadoDTO {
     }
 
 
-public static EmpleadoDTO fromDomain(Empleado empleado) {
+    public static EmpleadoDTO fromDomain(Empleado empleado) {
         return new EmpleadoDTO(
                 empleado.getDocumento().getValue(),
                 empleado.getNombre_apellidos().getValue(),
