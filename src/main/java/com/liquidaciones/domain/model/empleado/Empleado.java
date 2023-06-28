@@ -7,21 +7,24 @@ import org.springframework.data.annotation.Id;
 public class Empleado {
 
     @Id
-    private Integer id_empleado;
-    private IdDocumento documento;
+    private IdEmpleado id_empleado;
+    private Documento documento;
     private NombreApellidos nombre_apellidos;
 
     private FechaContrato fecha_contrato;
 
 
-
-    public Empleado(IdDocumento documento, NombreApellidos nombre_apellidos, FechaContrato fecha_contrato) {
+    public Empleado(IdEmpleado id_empleado, Documento documento, NombreApellidos nombre_apellidos, FechaContrato fecha_contrato) {
+        this.id_empleado = id_empleado;
         this.documento = documento;
         this.nombre_apellidos = nombre_apellidos;
         this.fecha_contrato = fecha_contrato;
     }
 
-    public IdDocumento getDocumento() {
+    public IdEmpleado getId_empleado() {
+        return id_empleado;
+    }
+    public Documento getDocumento() {
         return documento;
     }
 

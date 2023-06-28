@@ -3,9 +3,12 @@ package com.liquidaciones.domain.usecase;
 
 import com.liquidaciones.domain.model.empleado.Empleado;
 import com.liquidaciones.domain.model.gateways.EmpleadoRepository;
+import com.liquidaciones.domain.model.salario.Salario;
 import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.dto.EmpleadoDTO;
+import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.dto.SalarioDTO;
 import lombok.AllArgsConstructor;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -24,10 +27,20 @@ public class EmpleadoUseCase {
         return empleadoRepository.findByIdEmpleado(id_empleado);
     }
 
+//    public Mono<Empleado> actualizarEmpleado(EmpleadoDTO empleadoDTO) {
+//        Empleado empleado = empleadoDTO.toDomain();
+//        return empleadoRepository.updateEmpleado(empleado);
+//    }
+
+
+
     public Mono<Empleado> actualizarEmpleado(EmpleadoDTO empleadoDTO) {
-        Empleado empleado = empleadoDTO.toDomain();
-        return empleadoRepository.updateEmpleado(empleado);
+        return empleadoRepository.findByIdEmpleado(empleadoDTO.getId_empleado())
+                .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()))
+                .flatMap(existingempleado-> empleadoRepository.updateEmpleado(empleadoDTO.toDomain())
+                        .then(Mono.just(existingempleado)));
     }
+
 
     public Mono<Empleado> eliminarEmpleado(Integer id_empleado) {
 

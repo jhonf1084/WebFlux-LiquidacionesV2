@@ -44,17 +44,14 @@ public class EmpleadoHandler {
 
 
     //Se debe ajustar el metodo, ya que no esta teniendo en cuenta el id que se esta pasando en la Api
-    public Mono<ServerResponse> actualizarEmpleado(ServerRequest serverRequest) {
-        Integer id = Integer.valueOf(serverRequest.pathVariable("id"));
-        return empleadoUseCase
-                .getEmpleadoById(id)
-                .flatMap(empleado -> serverRequest
-                        .bodyToMono(EmpleadoDTO.class)
-                        .flatMap(empleadoDTO -> empleadoUseCase
-                                .actualizarEmpleado(empleadoDTO)
-                                .flatMap(savedEmpleado -> ServerResponse
-                                        .status(HttpStatus.CREATED)
-                                        .bodyValue(savedEmpleado))))
+ public Mono<ServerResponse> actualizarEmpleado (ServerRequest serverRequest) {
+       return serverRequest
+                .bodyToMono(EmpleadoDTO.class)
+                .flatMap(empleadoDTO -> empleadoUseCase
+                        .actualizarEmpleado(empleadoDTO)
+                        .flatMap(savedEmpleado -> ServerResponse
+                                .status(HttpStatus.CREATED)
+                                .bodyValue(savedEmpleado)))
                 .onErrorResume(exception -> ServerResponse
                         .badRequest()
                         .bodyValue(exception.getMessage()));

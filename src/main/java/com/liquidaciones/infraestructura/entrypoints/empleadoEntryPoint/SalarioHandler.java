@@ -43,19 +43,16 @@ public class SalarioHandler {
 
     //Este metodo queda diferente al de actualizar empleado
     public Mono<ServerResponse> actualizarSalario(ServerRequest serverRequest) {
-        Integer id = Integer.parseInt(serverRequest.pathVariable("id"));
-        return salarioUseCase
-                .getSalarioById(id)
-                .flatMap(salario -> serverRequest
-                        .bodyToMono(SalarioDTO.class)
-                        .flatMap(salarioDTO -> salarioUseCase
-                                .actualizarSalario(salarioDTO)
-                                .flatMap(savedSalario -> ServerResponse
-                                        .ok()
-                                        .bodyValue(savedSalario))))
-                .onErrorResume(exception -> ServerResponse
-                        .badRequest()
-                        .bodyValue(exception.getMessage()));
+     return serverRequest
+                 .bodyToMono(SalarioDTO.class)
+                 .flatMap(salarioDTO -> salarioUseCase
+                            .actualizarSalario(salarioDTO)
+                            .flatMap(savedSalario -> ServerResponse
+                                  .status(HttpStatus.CREATED)
+                                  .bodyValue(savedSalario)))
+                 .onErrorResume(exception -> ServerResponse
+                            .badRequest()
+                            .bodyValue(exception.getMessage()));
     }
 
     public Mono<ServerResponse> eliminarSalario(ServerRequest serverRequest) {

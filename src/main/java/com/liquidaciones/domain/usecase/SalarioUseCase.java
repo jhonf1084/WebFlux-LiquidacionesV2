@@ -27,6 +27,7 @@ public class SalarioUseCase {
 //            return salarioRepository.updateSalario(salario);
 //        }
 
+
     public Mono<Salario> actualizarSalario(SalarioDTO salarioDTO) {
         return salarioRepository.findByIdSalario(salarioDTO.getId_salario())
                 .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()))

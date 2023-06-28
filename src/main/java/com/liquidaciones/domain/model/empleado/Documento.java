@@ -3,11 +3,11 @@ package com.liquidaciones.domain.model.empleado;
 import lombok.Builder;
 
 @Builder
-public class IdDocumento {
+public class Documento {
 
    public Integer value;
 
-    public IdDocumento(Integer value) {
+    public Documento(Integer value) {
         this.value = value;
     }
 
