@@ -1,7 +1,7 @@
 package com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.dto;
 
 import com.liquidaciones.domain.model.salario.*;
-import com.liquidaciones.infraestructura.adapters.entity.SalarioDBO;
+
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
@@ -11,8 +11,8 @@ public class SalarioDTO {
     @Id
     private Integer id_salario;
     private Integer fk_id_empleado;
-    private Float sueldo;
-    private Float auxilio_transporte;
+    private Double sueldo;
+    private Double auxilio_transporte;
     private Integer fk_id_cargo;
     private LocalDate fecha_modificacion;
 
@@ -37,7 +37,7 @@ public class SalarioDTO {
                 salario.getFecha_modificacion().getValue());
     }
 
-    public SalarioDTO(Integer id_salario, Integer fk_id_empleado, Float sueldo, Float auxilio_transporte, Integer fk_id_cargo, LocalDate fecha_modificacion) {
+    public SalarioDTO(Integer id_salario, Integer fk_id_empleado, Double sueldo, Double auxilio_transporte, Integer fk_id_cargo, LocalDate fecha_modificacion) {
         this.id_salario = id_salario;
         this.fk_id_empleado = fk_id_empleado;
         this.sueldo = sueldo;
@@ -54,11 +54,11 @@ public class SalarioDTO {
         return fk_id_empleado;
     }
 
-    public Float getSueldo() {
+    public Double getSueldo() {
         return sueldo;
     }
 
-    public Float getAuxilio_transporte() {
+    public Double getAuxilio_transporte() {
         return auxilio_transporte;
     }
 

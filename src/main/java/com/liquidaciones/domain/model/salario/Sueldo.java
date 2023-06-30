@@ -5,13 +5,13 @@ import lombok.Builder;
 @Builder
 public class Sueldo {
 
-    private Float value;
+    private Double value;
 
-    public Sueldo(Float value) {
+    public Sueldo(Double value) {
         this.value = value;
     }
 
-    public Float getValue() {
+    public Double getValue() {
         return value;
     }
 

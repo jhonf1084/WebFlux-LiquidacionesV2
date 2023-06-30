@@ -5,13 +5,13 @@ import lombok.Builder;
 @Builder
 public class AuxilioTransporte {
 
-    private Float value;
+    private Double value;
 
-    public AuxilioTransporte(Float value) {
+    public AuxilioTransporte(Double value) {
         this.value = value;
     }
 
-    public Float getValue() {
+    public Double getValue() {
         return value;
     }
 

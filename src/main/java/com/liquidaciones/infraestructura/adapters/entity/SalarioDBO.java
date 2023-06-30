@@ -19,8 +19,8 @@ public class SalarioDBO {
     @Id
     private Integer id_salario;
     private Integer fk_id_empleado;
-    private Float sueldo;
-    private Float auxilio_transporte;
+    private Double sueldo;
+    private Double auxilio_transporte;
     private Integer fk_id_cargo;
     private LocalDate fecha_modificacion;
 
@@ -55,11 +55,11 @@ public class SalarioDBO {
         return fk_id_empleado;
     }
 
-    public Float getSueldo() {
+    public Double getSueldo() {
         return sueldo;
     }
 
-    public Float getAuxilio_transporte() {
+    public Double getAuxilio_transporte() {
         return auxilio_transporte;
     }
 

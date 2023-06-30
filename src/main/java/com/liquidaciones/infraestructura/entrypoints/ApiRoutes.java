@@ -2,6 +2,7 @@ package com.liquidaciones.infraestructura.entrypoints;
 
 import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.CargoHandler;
 import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.EmpleadoHandler;
+import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.LiquidacionHandler;
 import com.liquidaciones.infraestructura.entrypoints.empleadoEntryPoint.SalarioHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -57,5 +58,15 @@ public class ApiRoutes {
     }
 
 
+    @Bean
+    public RouterFunction<ServerResponse>liquidacionFunctionalEndpoints(LiquidacionHandler liquidacionHandler) {
+
+        return RouterFunctions
+                .route(POST(pathBase.concat("/liquidacion")).and(accept(MediaType.APPLICATION_JSON)), liquidacionHandler::crearLiquidacion)
+                .andRoute(GET(pathBase.concat("/liquidacion").concat(param)).and(accept(MediaType.APPLICATION_JSON)), liquidacionHandler::getLiquidacionById)
+                .andRoute(PUT(pathBase.concat("/liquidacion").concat(param)).and(accept(MediaType.APPLICATION_JSON)), liquidacionHandler::actualizarLiquidacion)
+                .andRoute(DELETE(pathBase.concat("/liquidacion").concat(param)).and(accept(MediaType.APPLICATION_JSON)), liquidacionHandler::eliminarLiquidacion)
+                .andRoute(GET(pathBase.concat("/liquidacion")).and(accept(MediaType.APPLICATION_JSON)), liquidacionHandler::getLiquidaciones);
+    }
 
 }
